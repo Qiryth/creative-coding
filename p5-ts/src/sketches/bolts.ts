@@ -23,7 +23,6 @@ const sketch1 = function (p: P5) {
         p.background(220);
         bolts.forEach(bolt => bolt.updateTargetPoint())
 
-        console.log(mouseIsOver)
         if (!mouseIsOver) return;
         mousePosition = new Vector(p.mouseX, p.mouseY);
         bolts.forEach(bolt => bolt.drawBolt())
@@ -54,7 +53,6 @@ const sketch2 = function (p: P5) {
         p.background(220);
         bolts.forEach(bolt => bolt.updateTargetPoint())
 
-        console.log(mouseIsOver)
         if (!mouseIsOver) return;
         mousePosition = new Vector(p.mouseX, p.mouseY);
         bolts.forEach(bolt => bolt.drawBolt())
@@ -93,7 +91,6 @@ const sketch3 = function (p: P5) {
         p.background(220);
         bolts.forEach(bolt => bolt.updateTargetPoint())
 
-        console.log(mouseIsOver)
         if (!mouseIsOver) return;
         mousePosition = new Vector(p.mouseX, p.mouseY);
         bolts.forEach(bolt => bolt.drawBolt())
