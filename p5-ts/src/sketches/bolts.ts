@@ -73,8 +73,48 @@ const sketch2 = function (p: P5) {
     }
 };
 
+const sketch3 = function (p: P5) {
+    let mouseIsOver: boolean;
+    let canvas: Renderer;
+    let bolts: Bolt[] = [];
+
+    p.setup = () => {
+        canvas = p.createCanvas(600, 800);
+        canvas.mouseOver(() => {
+            mouseIsOver = true;
+        });
+        canvas.mouseOut(() => {
+            mouseIsOver = false;
+            bolts = [];
+        });
+    }
+
+    p.draw = () => {
+        p.background(220);
+        bolts.forEach(bolt => bolt.updateTargetPoint())
+
+        console.log(mouseIsOver)
+        if (!mouseIsOver) return;
+        mousePosition = new Vector(p.mouseX, p.mouseY);
+        bolts.forEach(bolt => bolt.drawBolt())
+    }
+
+    p.mouseClicked = () => {
+        if (mouseIsOver) {
+            if (bolts.length == 0) {
+                bolts.push(new Bolt(canvas, p, () => mousePosition));
+            } else {
+                const indexOfLastBolt = bolts.length - 1;
+                bolts.push(new Bolt(canvas, p, () => bolts[0].targetPoint));
+                bolts[indexOfLastBolt].getBasePoint = () => bolts[indexOfLastBolt + 1].targetPoint;
+            }
+        }
+    }
+};
+
 new P5(sketch1);
 new P5(sketch2);
+new P5(sketch3);
 
 class Bolt {
     p: P5;
