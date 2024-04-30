@@ -1,5 +1,3 @@
-# polylines
+# Creative Coding
 
-This is a p5.js sketch using Bun+vite see it in action at https://polylines.bulkan.dev
-
-[Read more about it](https://bulkan-evcimen.com/delaunay-dreams/)
+This is the typescript project for my cerative code.
