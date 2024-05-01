@@ -1,5 +1,6 @@
 import P5, {Renderer, Vector} from "p5";
 import {Helper} from "../helpers/helper.ts";
+import "../style.css";
 
 let mousePosition: Vector;
 
