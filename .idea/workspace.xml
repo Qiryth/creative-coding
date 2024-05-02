@@ -14,12 +14,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2frAOatZDDRdNvz2iTNm7NI5mwB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,7 +29,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Code/creative-coding/bulds/bolts",
+    "last_opened_file_path": "C:/Code/creative-coding/builds/flowers/man-flower",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -42,7 +44,12 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Code\creative-coding\builds\flowers\man-flower" />
+      <recent name="C:\Code\creative-coding\ts-p5\src\sketches" />
       <recent name="C:\Code\creative-coding\bulds\bolts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Code\creative-coding\ts-p5\src" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -61,6 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1714548794667</updated>
       <workItem from="1714548798842" duration="4963000" />
+      <workItem from="1714655062063" duration="10239000" />
     </task>
     <servers />
   </component>
