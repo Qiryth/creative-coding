@@ -52,13 +52,23 @@ export class Helper {
 
         return {
             _offset: options?.offset || Math.floor(Helper._p.random(1000)),
+            increment() {
+                if (mode == "frame") return;
+                this._offset++;
+            },
+            decrement() {
+                if (mode == "frame") return;
+                this._offset--;
+            },
             get _currentValue() {
-                return mode == "frame" ? Helper._p.frameCount + this._offset : this._offset++;
+                return mode == "frame" ? Helper._p.frameCount + this._offset : this._offset;
             },
             get nextValue() {
+                this.increment();
                 return level * Helper._p.noise(this._currentValue * scale);
             },
             get nextWidth() {
+                this.increment();
                 let x = 0;
                 return Array.from(
                     {length: width}, () => level * Helper._p.noise(
@@ -67,6 +77,7 @@ export class Helper {
                 )
             },
             get nextHeight() {
+                this.increment();
                 let y = 0;
                 return Array.from(
                     {length: height}, () => level * Helper._p.noise(
@@ -105,6 +116,8 @@ export type NoiseMapper = {
     nextWidth: number[],
     nextHeight: number[],
     nextMatrix: number[][],
+    increment: () => void;
+    decrement: () => void;
 }
 
 type NoiseMapperOptions = {

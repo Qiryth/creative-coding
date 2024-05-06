@@ -6,8 +6,10 @@ import {Helper, NoiseMapper} from "../helpers/helper.ts";
 let helper: Helper;
 
 function sketch(p: P5) {
-    let noiseX : NoiseMapper;
-    let noiseY : NoiseMapper;
+    let waveNoise: NoiseMapper;
+    let colorR: NoiseMapper;
+    let colorG: NoiseMapper;
+    let colorB: NoiseMapper;
 
     p.setup = () => {
         // canvas setup
@@ -16,13 +18,20 @@ function sketch(p: P5) {
 
         // helper setup
         helper = new Helper(p);
-        noiseX = helper.createNoiseMapper(p.width, 0.008);
-        noiseY = helper.createNoiseMapper(p.height, 0.008)
+        waveNoise = helper.createNoiseMapper(p.height, 0.008, {width: p.width, mode: "increment"});
+        colorR = helper.createNoiseMapper(255, 0.002);
+        colorG = helper.createNoiseMapper(255, 0.002);
+        colorB = helper.createNoiseMapper(255, 0.002);
         p.strokeWeight(3)
     }
 
     p.draw = () => {
-        p.point(noiseX.nextValue, noiseY.nextValue)
+        p.translate(-p.frameCount, 0)
+        p.background(255)
+        p.stroke(colorR.nextValue, colorG.nextValue, colorB.nextValue);
+        waveNoise.nextWidth.forEach((value, index) => {
+            p.line(index * 3 + 1, 0, index * 3 + 1, value);
+        })
     }
 }
 
