@@ -37,8 +37,8 @@ function sketch(p: P5) {
     }
 
     p.draw = () => {
-        middleRadius.x = middleMapper.next;
-        innerRadius.x = innerMapper.next;
+        middleRadius.x = middleMapper.nextValue;
+        innerRadius.x = innerMapper.nextValue;
         let jointPoint = Vector.add(middlePoint, innerRadius.copy().rotate(innerRotation));
         let currentPoint = Vector.add(jointPoint, middleRadius.copy().rotate(middleRotation));
         // let outerPoint = Vector.add(currentPoint, outerRadius.copy().rotate(outerRotation));
