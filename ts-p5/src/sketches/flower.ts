@@ -8,7 +8,7 @@ function sketch(p: P5) {
     let middlePoint: Vector;
     let innerRadius: Vector;
     let middleRadius: Vector;
-    // let outerRadius: Vector;
+    let outerRadius: Vector;
     let canvas: Renderer;
 
     let innerRotation = 0;
@@ -17,9 +17,10 @@ function sketch(p: P5) {
 
     let innerMapper: SinusMapper;
     let middleMapper: SinusMapper;
+    let outerMapper: SinusMapper;
 
     let innerColor: Color = p.color(p.random(256), p.random(128), 0)
-    // let outerColor: Color = p.color(0, p.random(128, 256), p.random(256));
+    let outerColor: Color = p.color(0, p.random(128, 256), p.random(256));
 
     p.setup = () => {
         canvas = p.createCanvas(1000, 800);
@@ -28,10 +29,11 @@ function sketch(p: P5) {
         helper = new Helper(p);
         innerMapper = helper.createSinMapper(0, 50, 150, 10);
         middleMapper = helper.createSinMapper(0, 50, 150, 10)
+        outerMapper = helper.createSinMapper(0, 50, 150, 10)
 
         middlePoint = p.createVector(canvas.width / 2, canvas.height / 2);
         p.angleMode("degrees");
-        // outerRadius = p.createVector(150,0);
+        outerRadius = p.createVector(150,0);
         middleRadius = p.createVector(150, 0);
         innerRadius = p.createVector(150, 0);
     }
@@ -39,22 +41,23 @@ function sketch(p: P5) {
     p.draw = () => {
         middleRadius.x = middleMapper.nextValue;
         innerRadius.x = innerMapper.nextValue;
+        outerRadius.x = outerMapper.nextValue;
         let jointPoint = Vector.add(middlePoint, innerRadius.copy().rotate(innerRotation));
         let currentPoint = Vector.add(jointPoint, middleRadius.copy().rotate(middleRotation));
-        // let outerPoint = Vector.add(currentPoint, outerRadius.copy().rotate(outerRotation));
+        let outerPoint = Vector.add(currentPoint, outerRadius.copy().rotate(outerRotation));
         p.stroke(innerColor);
         p.strokeWeight(5);
         p.point(currentPoint.add(Vector.random2D().mult(2)));
-        // p.stroke(outerColor);
-        // p.strokeWeight(8);
-        // p.point(outerPoint.add(Vector.random2D().mult(1)));
+        p.stroke(outerColor);
+        p.strokeWeight(8);
+        p.point(outerPoint.add(Vector.random2D().mult(1)));
 
-        innerRotation += 5;
+        innerRotation += 2;
         middleRotation += -.5;
-        outerRotation += 6;
+        outerRotation += 2;
 
         innerColor = p.color(p.random(256), p.random(128, 256), 0)
-        // outerColor = p.color(0, p.random(128), p.random(256));
+        outerColor = p.color(0, p.random(128), p.random(256));
     }
 }
 
