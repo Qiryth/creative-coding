@@ -49,7 +49,7 @@ function sketch(p: P5) {
         // p.strokeWeight(8);
         // p.point(outerPoint.add(Vector.random2D().mult(1)));
 
-        innerRotation += 4.25;
+        innerRotation += 5;
         middleRotation += -.5;
         outerRotation += 6;
 
