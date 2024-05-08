@@ -1,6 +1,7 @@
 let mouseIsOver = false;
 let grainPositions = [];
 let rowLenght;
+let size = 1;
 
 function setup() {
   pixelDensity(1)
@@ -15,15 +16,42 @@ function setup() {
 function draw() {
   loadPixels();
   if (mouseIsPressed) {
-    if (grainPositions[width * mouseY + mouseX] == null) {
-      mouseButton == LEFT ? new Sand(width * mouseY + mouseX) : new Water(width * mouseY + mouseX);
-    }
+    let pos = width * mouseY + mouseX
+    getPositions(width * mouseY + mouseX).forEach(pos => {
+      if (grainPositions[pos] == null) {
+        mouseButton == LEFT ? new Sand(pos) : new Water(pos);
+      }
+    })
   }
 
   for (let i = 0; i < PixelGrain.instances.length; i++) {
     PixelGrain.instances[i].update();
   }
   updatePixels();
+}
+
+function keyPressed() {
+  if (key == '1') {
+    size = 0;
+  } else if (key == '2') {
+    size = 1;
+  } else if (key == '3') {
+    size = 2
+  }
+}
+
+function getPositions(pos) {
+  if (size == 0) {
+    return [pos];
+  } else if (size == 1) {
+    return [pos, pos + 1, pos -1, pos + rowLenght, pos - rowLenght]
+  } else if (size == 2) {
+    return [
+      pos, pos + 1, pos -1, pos + 2, pos - 2,
+      pos + rowLenght, pos + rowLenght * 2, pos - rowLenght, pos - rowLenght * 2,
+      pos + rowLenght + 1, pos + rowLenght - 1, pos - rowLenght + 1, pos - rowLenght - 1
+    ]
+  }
 }
 
 function mouseToPixelIndex() {
