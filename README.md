@@ -23,3 +23,5 @@ https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/disco-flower/
 https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-line/
 https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-wave/
 https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-matrix/
+
+### Week 2
