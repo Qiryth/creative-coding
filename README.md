@@ -25,3 +25,7 @@ https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-wave/
 https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-matrix/
 
 ### Week 2
+| Sand |
+| ------------ |
+https://ajapai.github.io/creative-coding/js-p5/sprint-2/sand/
+https://ajapai.github.io/creative-coding/js-p5/sprint-2/word/
