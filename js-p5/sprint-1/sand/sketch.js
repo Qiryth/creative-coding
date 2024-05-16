@@ -18,7 +18,7 @@ function draw() {
   if (mouseIsPressed) {
     let pos = width * mouseY + mouseX
     getPositions(width * mouseY + mouseX).forEach(pos => {
-      if (grainPositions[pos] == null) {
+      if (random([true, false, false, false]) && grainPositions[pos] == null) {
         mouseButton == LEFT ? new Sand(pos) : new Water(pos);
       }
     })
@@ -37,6 +37,8 @@ function keyPressed() {
     size = 1;
   } else if (key == '3') {
     size = 2
+  } else if (key == '4') {
+    size = 3
   }
 }
 
@@ -44,12 +46,19 @@ function getPositions(pos) {
   if (size == 0) {
     return [pos];
   } else if (size == 1) {
-    return [pos, pos + 1, pos -1, pos + rowLenght, pos - rowLenght]
+    return [pos + 1, pos -1, pos + rowLenght, pos - rowLenght]
   } else if (size == 2) {
     return [
-      pos, pos + 1, pos -1, pos + 2, pos - 2,
-      pos + rowLenght, pos + rowLenght * 2, pos - rowLenght, pos - rowLenght * 2,
+      pos, pos + 2, pos - 2,
+      pos + rowLenght * 2, pos - rowLenght * 2,
       pos + rowLenght + 1, pos + rowLenght - 1, pos - rowLenght + 1, pos - rowLenght - 1
+    ]
+  } else if (size == 3) {
+    return [
+      pos + 1, pos -1, pos + 3, pos -3,
+      pos + rowLenght, pos - rowLenght, pos + rowLenght * 3, pos - rowLenght * 3,
+      pos + rowLenght + 2, pos + rowLenght - 2, pos - rowLenght + 2, pos - rowLenght - 2,
+      pos + rowLenght * 2 + 1, pos + rowLenght * 2 - 1, pos - rowLenght * 2 + 1, pos - rowLenght * 2 - 1
     ]
   }
 }
