@@ -1,6 +1,21 @@
-let powder = ["flour", "chocolate", "yeast", "nuts", "berries"];
-let liquids = ["milk", "water", "oil", "vinegar", "broth", "lemon juice", "egg white", "egg yolk"];
-let backgroundColor = {r: 220, g: 220, b: 220, a: 255};
+let blocks = [
+  "We add some |%|.",
+  "Some |& |should not be forgotten!",
+  "A little bit of |&|.",
+  "Pour in 200ml of |&|.",
+  "Srinkle 10el |% |on top.",
+  "Add a pinch of |%|.",
+  "Mix well!",
+  "Fold in the |%|!",
+  "Chop the |% |into little pieces.",
+  "Mix in the |& |and stir it well.",
+  "Pre chew some |% |and spit it in.",
+  "Grate a lot of |% |!",
+  "Drop 2ml |& |from very high up.",
+  "Splash in droplets of |&|."
+];
+
+let backgroundColor = {r: 80, g: 80, b: 80, a: 255};
 let solidColor = {r: 0, g: 0, b: 0, a: 255};
 let textX;
 let textY;
@@ -13,6 +28,26 @@ function setup() {
   pixelDensity(1)
   createCanvas(windowWidth, windowHeight);
   background(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
+
+  powder = [
+    ["Chocolate", color(123, 63, 0, 255)],
+    ["Flour", color(248, 241, 255, 255)],
+    ["Berries", color(160, 22, 65, 255)],
+    ["Wasabi", color(89, 165, 35, 255)],
+    ["Salad", color(158, 216, 112, 255)],
+    ["Oats", color(216, 194, 157, 255)],
+    ["Beets", color(116, 27, 71, 255)]
+  ];
+
+  liquids = [
+    ["Water", color(100, 200, 255, 255)],
+    ["Oil", color(109, 113, 46, 255)],
+    ["Vinegar", color(250, 249, 238, 255)],
+    ["Milk", color(253, 255, 245, 255)],
+    ["Lemon Juice", color(245, 251, 150, 255)],
+    ["Broth", color(158, 107, 23, 255)],
+    ["Sriracha", color(136, 21, 4, 255)]
+  ];
 
   textX = 50;
   textY = width / 30;
@@ -33,27 +68,32 @@ function draw() {
 }
 
 function generateText() {
-  return [
-    ["Hello, I need some ", color(0, 0, 0, 255)],
-    ["Water", color(100, 200, 255, 255)],
-    [". ", color(0,0,0,255)],
-    ["Also ", color(0, 0, 0, 255)],
-    ["Chocolate ", color(123, 63, 0, 255)],
-    ["would be nice! ", color(0,0,0,255)],
-    ["A cup of ", color(0, 0, 0, 255)],
-    ["Milk ", color(253, 255, 245, 255)],
-    ["is a must! ", color(0,0,0,255)],
-    ["Hello, I need some ", color(0, 0, 0, 255)],
-    ["Water", color(100, 200, 255, 255)],
-    [". ", color(0,0,0,255)],
-    ["Also ", color(0, 0, 0, 255)],
-    ["Chocolate ", color(123, 63, 0, 255)],
-    ["would be nice! ", color(0,0,0,255)],
-    ["A cup of ", color(0, 0, 0, 255)],
-    ["Milk ", color(253, 255, 245, 255)],
-    ["is a must!", color(0,0,0,255)],
-    ["End"]
-  ]
+  let text = [];
+  let blockAmount = random([2, 3, 4]);
+
+  for (let i = 0; i < blockAmount; i++) {
+    let currentBlock = random(blocks);
+    let splits = currentBlock.split("|");
+
+    for (let j = 0; j < splits.length; j++) {
+      if (splits[j] == "%") text.push(random(powder));
+      else if (splits[j] == "% ") {
+        text.push(random(powder));
+        text[text.length - 1][0] += " ";
+      }
+      else if (splits[j] == "&") text.push(random(liquids));
+      else if (splits[j] == "& ") {
+        text.push(random(liquids));
+        text[text.length - 1][0] += " ";
+      }
+      else text.push([splits[j], color(0, 0, 0, 255)]);
+
+      if (j >= splits.length - 1) text[text.length - 1][0] += " ";
+    }
+  }
+
+  text.push(["END"]);
+  return text;
 }
 
 // Draw Text
@@ -68,9 +108,13 @@ let currentX;
 let currentY;
 
 function drawText(generatedTextAndColors) {
+  words = [];
+  currentWord = "";
   textAndColors = generatedTextAndColors;
   currentX = textX;
   currentY = textY;
+
+  textAndColorsIndex = wordsIndex = currentWordIndex = 0;
 
   printLetters();
 }
@@ -92,6 +136,8 @@ function printLetters() {
     if (currentColor) fill(currentColor);
     else {
       convertPixels();
+      setTimeout(() => Solid.clear(), 3000)
+      setTimeout(() => drawText(generateText()), 5000)
       return;
     }
   }
@@ -106,9 +152,9 @@ function printLetters() {
 function convertPixels() {
   loadPixels();
   for(let i = 0; i < pixels.length; i+=4) {
-    if([100, 253].includes(pixels[i])) {
+    if([100, 109, 136, 158, 245, 250, 253].includes(pixels[i])) {
       new Liquid(i / 4, pixels[i], pixels[i+1], pixels[i+2], pixels[i+3]);
-    } else if ([123].includes(pixels[i])) {
+    } else if ([89, 116, 123, 158, 160, 166, 216, 248].includes(pixels[i])) {
       new Powder(i / 4, pixels[i], pixels[i+1], pixels[i+2], pixels[i+3]);
     } else if (pixels[i] == 0) {
       new Solid(i / 4, pixels[i], pixels[i+1], pixels[i+2], pixels[i+3]);
