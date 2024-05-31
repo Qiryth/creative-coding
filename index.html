@@ -5,6 +5,134 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    alo
+    <div class="section">
+      <h1 class="Title">Sprint - 1</h1>
+      <div class="reflexion">
+        Im ersten Sprint habe ich mich zunächst wieder mit p5.js vertraut gemacht und zufällig Punkt generiert,
+        die ich dann mit einer Shape verbinde.
+        In einem zweiten Schritt haben wir als Gruppe den Künstler John Whitney angeschaut. Mir persönlich gefielen
+        die Formen die er mit Punkten generiert hat. Um einen ähnlichen Effekt zu erzielen, habe ich versucht
+        eine gewisse Natürlichkeit in die generierten Formen zu bringen, indem die Punkte in einem kleinen Radius
+        zufällig erscheinen können.
+        Da ich in den ersten Versuchen immer den "Strich" neu ansetzten musste um die Formen zu erzielen, hat es
+        mich wunder genommen ob man auch mit einem Strich eine schöne Blume zeichnen kann un dies dann Umgesetzt.
+        Spannend fand ich wie man beim rekreiern vom Code auf verschiedene Ideen kommt wie man es umsetzten könnte.
+        Ich entschied mich mit Vektoren zu arbeiten welche an Gelenken verbunden sind um die Blumen zu zeichnen.
+        Im letzten teil des Sprints widmete ich mich noch der Noise Funktion von p5. Dabei handelt es sich um Perlin noise.
+        Um diese zu verstehen habe ich zunächst einn Punkt gezeichnet der seine Position über die Zeit hinweg verändert.
+        Im zweiten schritt habe ich versucht eine Welle zu erzeugen die mit der Zeit sich verändert. Als letztes machte
+        ich noch eine Matrix noise welche die Squares auf dem Canvas über die Zeit hinweg vergrössert und verkleinert.
+      </div>
+      <div class="gallery">
+        <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-1/random-points/">
+          <img src="images/random-points.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/bolts/">
+          <img src="images/bolts.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/first-flower/">
+          <img src="images/first-flower.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/man-flower/">
+          <img src="images/man-flower.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/tri-flower/">
+          <img src="images/tri-flower.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/flower-line/">
+          <img src="images/line-flower.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/flower-line-dynamic/">
+          <img src="images/line-flower-dynamic.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/stacking-flower/">
+          <img src="images/stacking-flower.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/disco-flower/">
+          <img src="images/disco-flower.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-line/">
+          <img src="images/dot-noise.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-wave/">
+          <img src="images/wave-noise.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-matrix/">
+          <img src="images/matrix-noise.png" alt="HTML tutorial">
+        </a>
+      </div>
+    </div>
+    <div class="section">
+      <h1 class="Title">Sprint - 2</h1>
+      <div class="reflexion">
+        Im zweiten Sprint habe ich mich dem Thema Sand und Wasser Simulation gewidmet. Um eine möglichst performante
+        Simultaion zu erzeugen entschied ich mich die Pixel des Canvas zu manipulieren. Heisst jedes Pixel kann ein
+        Korn enthalten und jedes Korn kann nur einem Pixel zugeordent sein.
+        Die Logik des Sandes ist ziemlich einfach, er fällt jedes Frame um eine Pixelreihe nach unten, sofern möglich.
+        Das Wasser jedoch kann auch horizontal sich bewegen, falls es in der nächsten Pixelreihe keinen freien Platz findet.
+
+        In Der Gruppe haben wir dann dass das Thema Kochbuch gewählt und ich habe einen Text generieren lassen welcher
+        bestimmte Zutaten in bestimmten Farben enthielt. Dann habe ich den Canvas nach Farben gescannt und die Pixel in
+        Körner oder Flüssigkeiten umgewandelt.
+
+        Die Markov Chain war mir schon bekannt, aber ich habe für mein Programm etwas im Stiil von House of Dust verwendet.
+        Wobei ich hier die Farben der Zutaten vodefienert habe um danach den Screen nach diesen Farben abzuscannen.
+      </div>
+      <div class="gallery">
+        <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-2/sand/">
+          <img src="images/sand.png" alt="HTML tutorial">
+        </a>
+        <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-2/word/">
+          <img src="images/word.png" alt="HTML tutorial">
+        </a>
+      </div>
+    </div>
+    <div class="section">
+      <h1 class="Title">Sprint - 3</h1>
+      <div class="reflexion">
+        Im dritten Sprint hatte ich nicht so viel Zeit um Rack 2 zu lernen desshalb habe ich einfach mit der p5
+        sound library herumgespielt. Im ersten versuch habe ich einen kleinen media Player gemacht der in allen 
+        sketches dieses Sprintes eingebaut ist. Man kann mit den Tasten 0 bis 9 lieder auswählen und mit Spacebar
+        die Musik Pausieren.
+
+        Für den zweiten sketch versuchte ich das Audio mit Noise zu kombinieren, hierbei habe ich einfach die Zeit
+        Komponente mit der Sound analyse ersetzt. Da das Resultat etwas entäuschend ist, habe ich stattdessen versucht
+        die Analyse zu überlagern um ein ausdrucksstärkeres Bild zu erzeugen. Auch dies war eher langweilig.
+
+        Nun habe ich die Idee mit der Noise gescrapped und eine Punktewolke erzeugt von der jeder Punkt ein eigener
+        Frequenzbereich wiederspiegelt. Mit dem Resultat bin ich nun zufrieden, da man tatsächlich die Bewegung auf 
+        dem Canvas den Tönen in der Musik zuordnen kann.
+        Nächstes mal würde ich auf jeden Fall noch die waveform analyse ausprobieren, da ich diese gar nicht gebraucht habe.
+      </div>
+      <div class="gallery">
+        <a href="">
+          <img src="images/" alt="HTML tutorial">
+        </a>
+        <a href="">
+          <img src="images/" alt="HTML tutorial">
+        </a>
+        <a href="">
+          <img src="images/" alt="HTML tutorial">
+        </a>
+        <a href="">
+          <img src="images/" alt="HTML tutorial">
+        </a>
+      </div>
+    </div>
+    <div class="section">
+      <h1 class="Title">Sprint - 4</h1>
+      <div class="reflexion">
+        Für den 4. Sprint möchte ich Sprint 2 weiterführen. Wir möchten die Projekte von Mirja, Yannic und mir
+        kombinieren um ein dreistufiges Projekt zu erzeugen. Dies besteht aus Rezept generieren - Zutaten mischen - Sortieren und Essen.
+        Mein Part ist das zusammenmischen der Zutaten. Dafür scanne ich den generierten Text von Mirja nach 
+        Zutatenwörter und erzeuge dann an den gegebenen Stellen Sandkörner oder Flüssigkeiten die sich dann durch die 
+        Simulation vermixen oder türmen.
+      </div>
+      <div class="gallery">
+        <a href="">
+          <img src="images/" alt="HTML tutorial">
+        </a>
+      </div>
+    </div>
   </body>
 </html>
