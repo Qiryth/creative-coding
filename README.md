@@ -29,3 +29,16 @@ https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-matrix/
 | ------------ |
 https://ajapai.github.io/creative-coding/js-p5/sprint-2/sand/
 https://ajapai.github.io/creative-coding/js-p5/sprint-2/word/
+
+### Week 3
+| Sound |
+| ------------ |
+https://ajapai.github.io/creative-coding/js-p5/sprint-3/sound/
+https://ajapai.github.io/creative-coding/js-p5/sprint-3/sound-noise/
+https://ajapai.github.io/creative-coding/js-p5/sprint-3/sound-overlap/
+https://ajapai.github.io/creative-coding/js-p5/sprint-3/sound-bubbles/
+
+### Week 4
+| Food Recipe |
+| ------------ |
+https://ajapai.github.io/creative-coding/js-p5/sprint-4/combined/
