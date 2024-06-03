@@ -162,17 +162,21 @@ function getWordPositions() {
 
     for (const [key, value] of Object.entries(liquidColors)) {
       if (currentWord.includes(key)) {
-        liquidPositions.push({x: Math.floor(currentX), y: currentY, color: value, name: key})
-        liquidPositions.push({x: Math.floor(currentX - textWidth(currentWord) / 2), y: currentY, color: value, name: key})
-        liquidPositions.push({x: Math.floor(currentX - textWidth(currentWord)), y: currentY, color: value, name: key})
+        let currentPosX = currentX - textWidth(currentWord);
+        while (currentPosX < currentX) {
+          liquidPositions.push({x: Math.floor(currentPosX), y: currentY, color: value, name: key})
+          currentPosX += textWidth(" ");
+        }
       }
     }
 
     for (const [key, value] of Object.entries(foodColors)) {
       if (currentWord.includes(key)) {
-        foodPositions.push({x: Math.floor(currentX), y: currentY, color: value, name: key})
-        foodPositions.push({x: Math.floor(currentX - textWidth(currentWord) / 2), y: currentY, color: value, name: key})
-        foodPositions.push({x: Math.floor(currentX - textWidth(currentWord)), y: currentY, color: value, name: key})
+        let currentPosX = currentX - textWidth(currentWord);
+        while (currentPosX < currentX) {
+          foodPositions.push({x: Math.floor(currentPosX), y: currentY, color: value, name: key})
+          currentPosX += textWidth(" ");
+        }
       }
     }
   })
@@ -190,7 +194,7 @@ class PixelGrain {
       pos + rowLenght + 2, pos + rowLenght - 2, pos - rowLenght + 2, pos - rowLenght - 2,
       pos + rowLenght * 2 + 1, pos + rowLenght * 2 - 1, pos - rowLenght * 2 + 1, pos - rowLenght * 2 - 1
     ].forEach(position => {
-      if (random([true, false, false, false]) && PixelGrain.positions[pos] == null) new this(position, color)
+      if (random(0, 10) < 1 && PixelGrain.positions[pos] == null) new this(position, color)
     })
   }
 
