@@ -7,6 +7,8 @@ let promptText;
 let startSorintg;
 let doneSorting;
 let allSettled;
+let screenshot;
+let screenshotTaken = false;
 var Anzahl = [
   "100g",
   "1tsp",
@@ -126,20 +128,28 @@ function setup() {
   button1.position(windowWidth / 2 - button1.width / 2, windowHeight - 150);
   button.position(windowWidth / 2 - button1.width / 2, windowHeight - 90);
   button2.position(windowWidth / 2 - button1.width / 2, windowHeight - 90);
+
   button1.mousePressed(stoprunning);
   button.mousePressed(startrunning);
   button2.mousePressed(startsort);
   button1.size(100, 50);
   button.size(100, 50);
+  button2.size(100, 50);
+  button2.style("background", color(0));
   button1.style("background", color(0));
   button.style("background", color(0));
   button1.style("font-size", "15px");
+  button2.style("font-size", "15px");
   button.style("font-size", "15px");
   button1.style("color", color(230));
   button.style("color", color(230));
+  button2.style("color", color(230));
   frameRate(15);
   button.hide();
+  button2.hide();
   rowLenght = width;
+
+  noSmooth();
 }
 
 function draw() {
@@ -236,28 +246,27 @@ function draw() {
     // Check if all pixels are settled
     if (PixelGrain.instances.every((pixel) => pixel.settled)) {
       allSettled = true;
+      state = 2;
     }
   }
-  if (startSorintg && allPowderSettled) {
+  if (startSorintg && allSettled && !doneSorting) {
+    if (screenshotTaken == false) {
+      takeScreenshot();
+    } else {
+      screenshot.loadPixels();
+      for (let i = 0; i < 1000; i++) {
+        sortPixels();
+      }
+      screenshot.updatePixels();
+      image(screenshot, 0, 0, width, height);
+      //doneSorting = true;
+    }
   }
+}
+function takeScreenshot() {
   screenshot = get();
   console.log("Screenshot taken");
-  image(screenshot, 0, 0);
-  console.log("Screenshot displayed");
-
-  screenshot.loadPixels();
-
-  for (let i = 0; i < 1000; i++) {
-    sortPixels();
-  }
-
-  screenshot.updatePixels();
-
-  image(screenshot, 0, 0, width, height);
-
-  doneSorting = true;
-
-  updatePixels();
+  screenshotTaken = true;
 }
 
 function startsort() {
@@ -291,6 +300,7 @@ function stoprunning() {
   } else if (sketchrunning == false) {
     button.hide();
     button1.hide();
+    button2.show();
     getWordPositions();
     state = 1;
     frameRate(60);
