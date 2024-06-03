@@ -4,6 +4,9 @@ let button;
 let button1;
 let piece;
 let promptText;
+let startSorintg;
+let doneSorting;
+let allSettled;
 var Anzahl = [
   "100g",
   "1tsp",
@@ -229,12 +232,54 @@ function draw() {
 
     PixelGrain.update();
     updatePixels();
+
+    // Check if all pixels are settled
+    if (PixelGrain.instances.every((pixel) => pixel.settled)) {
+      allSettled = true;
+    }
   }
+  if (startSorintg && allPowderSettled) {
+  }
+  screenshot = get();
+  console.log("Screenshot taken");
+  image(screenshot, 0, 0);
+  console.log("Screenshot displayed");
+
+  screenshot.loadPixels();
+
+  for (let i = 0; i < 1000; i++) {
+    sortPixels();
+  }
+
+  screenshot.updatePixels();
+
+  image(screenshot, 0, 0, width, height);
+
+  doneSorting = true;
+
+  updatePixels();
 }
 
 function startsort() {
   liquidPositions = [];
   foodPositions = [];
+  startSorintg = true;
+}
+
+function sortPixels() {
+  const x = random(screenshot.width - 1); // Ensuring we don't go out of bounds
+  const y = random(screenshot.height);
+
+  const colorOne = screenshot.get(x, y);
+  const colorTwo = screenshot.get(x + 1, y); // Compare with the next pixel to the right
+
+  const totalOne = red(colorOne) + green(colorOne) + blue(colorOne);
+  const totalTwo = red(colorTwo) + green(colorTwo) + blue(colorTwo);
+
+  if (totalOne < totalTwo) {
+    screenshot.set(x, y, colorTwo);
+    screenshot.set(x + 1, y, colorOne);
+  }
 }
 
 function stoprunning() {
@@ -310,6 +355,18 @@ class PixelGrain {
   static instances = [];
   static positions = [];
 
+  static allPowderSettled() {
+    for (let i = 0; i < PixelGrain.instances.length; i++) {
+      if (
+        PixelGrain.instances[i].type === 0 &&
+        !PixelGrain.instances[i].settled
+      ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   static spawnAtPosition(x, y, color) {
     let pos = rowLenght * y + x;
     [
@@ -350,11 +407,13 @@ class PixelGrain {
   color;
   bias;
   type;
+  settled;
 
   constructor(pos, color) {
     this.pos = pos;
     this.bias = random([-1, 1]);
     this.color = color;
+    this.settled = false;
   }
 
   drawPixel() {
@@ -382,16 +441,27 @@ class Powder extends PixelGrain {
   }
 
   update() {
-    if (this.pos * 4 > pixels.length - rowLenght * 4) return;
+    if (this.pos * 4 > pixels.length - rowLenght * 4) {
+      this.settled = true;
+      return;
+    }
 
     if (this.bias < 0) {
-      this.movePixel(rowLenght) ||
-        this.movePixel(rowLenght + this.bias) ||
-        this.movePixel(rowLenght - this.bias);
+      if (
+        !this.movePixel(rowLenght) &&
+        !this.movePixel(rowLenght + this.bias) &&
+        !this.movePixel(rowLenght - this.bias)
+      ) {
+        this.settled = true;
+      }
     } else {
-      this.movePixel(rowLenght) ||
-        this.movePixel(rowLenght + this.bias) ||
-        this.movePixel(rowLenght - this.bias);
+      if (
+        !this.movePixel(rowLenght) &&
+        !this.movePixel(rowLenght + this.bias) &&
+        !this.movePixel(rowLenght - this.bias)
+      ) {
+        this.settled = true;
+      }
     }
   }
 
@@ -402,6 +472,7 @@ class Powder extends PixelGrain {
       this.pos += nextIndex;
       this.drawPixel();
       PixelGrain.positions[this.pos] = this;
+      this.settled = false;
     } else if (PixelGrain.positions[this.pos + nextIndex].type == 1) {
       PixelGrain.positions[this.pos] = null;
       this.clearPixel();
@@ -415,6 +486,7 @@ class Powder extends PixelGrain {
       this.pos += nextIndex;
       this.drawPixel();
       PixelGrain.positions[this.pos] = this;
+      this.settled = false;
     } else return false;
     return true;
   };
@@ -430,20 +502,36 @@ class Liquid extends PixelGrain {
   }
 
   update() {
-    if (this.pos * 4 > pixels.length - rowLenght * 4) return;
+    if (this.pos * 4 > pixels.length - rowLenght * 4) {
+      this.settled = true;
+      return;
+    }
+
+    if (PixelGrain.allPowderSettled()) {
+      this.settled = true;
+      return;
+    }
 
     if (this.bias < 0) {
-      this.movePixel(rowLenght) ||
-        this.movePixel(rowLenght + this.bias) ||
-        this.movePixel(rowLenght - this.bias) ||
-        this.movePixel(this.bias) ||
-        this.movePixel(-this.bias);
+      if (
+        !this.movePixel(rowLenght) &&
+        !this.movePixel(rowLenght + this.bias) &&
+        !this.movePixel(rowLenght - this.bias) &&
+        !this.movePixel(this.bias) &&
+        !this.movePixel(-this.bias)
+      ) {
+        this.settled = true;
+      }
     } else {
-      this.movePixel(rowLenght) ||
-        this.movePixel(rowLenght + this.bias) ||
-        this.movePixel(rowLenght - this.bias) ||
-        this.movePixel(this.bias) ||
-        this.movePixel(-this.bias);
+      if (
+        !this.movePixel(rowLenght) &&
+        !this.movePixel(rowLenght + this.bias) &&
+        !this.movePixel(rowLenght - this.bias) &&
+        !this.movePixel(this.bias) &&
+        !this.movePixel(-this.bias)
+      ) {
+        this.settled = true;
+      }
     }
   }
 
@@ -454,6 +542,7 @@ class Liquid extends PixelGrain {
       this.pos += nextIndex;
       this.drawPixel();
       PixelGrain.positions[this.pos] = this;
+      this.settled = false;
     } else return false;
     return true;
   };
