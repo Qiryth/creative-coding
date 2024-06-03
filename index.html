@@ -5,6 +5,12 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <div class="tab">
+      <button class="tablink active">Sprint-1</button>
+      <button class="tablink">Sprint-2</button>
+      <button class="tablink">Sprint-3</button>
+      <button class="tablink">Sprint-4</button>
+    </div>
     <div class="section">
       <h1 class="Title">Sprint - 1</h1>
       <div class="reflexion">
@@ -23,13 +29,16 @@
         Im zweiten schritt habe ich versucht eine Welle zu erzeugen die mit der Zeit sich verändert. Als letztes machte
         ich noch eine Matrix noise welche die Squares auf dem Canvas über die Zeit hinweg vergrössert und verkleinert.
       </div>
+      <h2>Gallery</h2>
       <div class="gallery">
+        <h3>Dots n' Bolts</h3>
         <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-1/random-points/">
           <img src="images/random-points.png" alt="Random Points">
         </a>
         <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/bolts/">
           <img src="images/bolts.png" alt="Bolts">
         </a>
+        <h3>Flowers</h3>
         <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/first-flower/">
           <img src="images/first-flower.png" alt="First Flower">
         </a>
@@ -51,6 +60,7 @@
         <a href="https://ajapai.github.io/creative-coding/builds/sprint-1/flowers/disco-flower/">
           <img src="images/disco-flower.png" alt="Disco Flower">
         </a>
+        <h3>Noise</h3>
         <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-1/noise/noise-line/">
           <img src="images/dot-noise.png" alt="Dot Noise">
         </a>
@@ -78,7 +88,9 @@
         Die Markov Chain war mir schon bekannt, aber ich habe für mein Programm etwas im Stiil von House of Dust verwendet.
         Wobei ich hier die Farben der Zutaten vodefienert habe um danach den Screen nach diesen Farben abzuscannen.
       </div>
+      <h2>Gallery</h2>
       <div class="gallery">
+        <h3>Sand n' Words</h3>
         <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-2/sand/">
           <img src="images/sand.png" alt="Sand Simulation">
         </a>
@@ -104,7 +116,9 @@
         dem Canvas den Tönen in der Musik zuordnen kann.
         Nächstes mal würde ich auf jeden Fall noch die waveform analyse ausprobieren, da ich diese gar nicht gebraucht habe.
       </div>
+      <h2>Gallery</h2>
       <div class="gallery">
+        <h3>Sound Analysis</h3>
         <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-3/sound/">
           <img src="images/sound.png" alt="Sound">
         </a>
@@ -128,11 +142,37 @@
         Zutatenwörter und erzeuge dann an den gegebenen Stellen Sandkörner oder Flüssigkeiten die sich dann durch die 
         Simulation vermixen oder türmen.
       </div>
+      <h2>Gallery</h2>
       <div class="gallery">
+        <h4>Choose - Mix - Sort</h4>
         <a href="https://ajapai.github.io/creative-coding/js-p5/sprint-4/combined/">
-          <img src="images/" alt="Combined Food Mixing">
+          <img src="images/choose_mix_sort.png" alt="Combined Food Mixing">
         </a>
       </div>
     </div>
   </body>
 </html>
+
+<script>
+  let tabButtons = document.getElementsByClassName("tablink");
+  let sections = document.getElementsByClassName("section");
+
+
+  for (let i = 0; i < 4; i++) {
+    if (i != 0) sections[i].style.display = "none";
+
+    tabButtons[i].onclick = () => {
+      for (let j = 0; j < 4; j++) {
+        sections[j].style.display = "none";
+        tabButtons[j].className = tabButtons[j].className.replace("active", "");
+      }
+
+      sections[i].style.display = "block";
+      tabButtons[i].className += " active";
+    }
+
+
+
+  }
+
+</script>
