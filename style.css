@@ -1,4 +1,4 @@
-html, body {
+body {
   margin: 0;
   padding: 0;
 }
@@ -37,6 +37,8 @@ html, body {
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
+  font-size: larger;
+  font-weight: bold;
 }
 
 .tab button:hover {
